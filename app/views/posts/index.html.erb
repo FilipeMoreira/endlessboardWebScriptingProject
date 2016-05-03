@@ -1,0 +1,24 @@
+<%= render 'layouts/header' %>
+
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'New Post', new_post_path, class: "btn btn-default right", id: "btn-new-post" %>
+
+<ul class='list-group' style="margin-top: 52px">
+    <% @posts.each do |post| %>
+      <a href="posts/<%= post.id %>">
+        <li class='list-group-item'>
+          <p class='right'>&nbsp<%= post.p_date %></p>
+          <p class='right'> <img src="<%= post.user.u_picture %>" height='20px' class='img-circle'> <%= post.user.u_name %> at</p>
+          <h2><%= post.p_title %></h2>
+          <!--% = post.p_content %-->
+          <!--% = post.post %-->
+          <p><%= link_to 'Edit', edit_post_path(post) %></p>
+        </li>
+      </a>
+    <% end %>
+</ul>
+</div>
+
+<%= render 'layouts/footer' %>

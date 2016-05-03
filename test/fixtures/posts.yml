@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  p_title: MyString
+  p_content: MyText
+  p_date: 2016-04-27 18:30:14
+  user_id: 
+  post_id: 
+
+two:
+  p_title: MyString
+  p_content: MyText
+  p_date: 2016-04-27 18:30:14
+  user_id: 
+  post_id: 
