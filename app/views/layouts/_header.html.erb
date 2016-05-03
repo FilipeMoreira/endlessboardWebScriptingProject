@@ -19,6 +19,7 @@
     		<% if logged_in? %>
     			<ul class="nav navbar-nav navbar-left">
     				<li><%= link_to "Welcome "+current_user.u_name, current_user %></li>
+    				<li><img src="<%= current_user.u_picture %>" height='48px' class='img-circle' style="border: solid 6px #efefef"></li>
     			</ul>
     		<% end %>
     	<div class="navbar-form navbar-left">
@@ -53,7 +54,7 @@
 			</ul>
 		<% end %>
 
-		<div class="navbar-form navbar-right">
+		<!--div class="navbar-form navbar-right">
 			<form method='GET' action='posts/search'>
 				<div class='form-group'>
 					<input type='text' class='form-control' placeholder='Search Posts'></input>
@@ -62,7 +63,7 @@
 					<input type='submit' class='btn btn-success' value='Search'></input>
 				</div>
 			</form>
-		</div>
+		</div-->
 
       <!--form class="navbar-form navbar-left" role="search">
         <div class="form-group">

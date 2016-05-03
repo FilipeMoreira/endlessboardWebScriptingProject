@@ -26,6 +26,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    uploaded_io = params[:user][:u_picture]
+    File.open(Rails.root.join('public', 'uploaded', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+
+    @user.u_picture = "/uploaded/"+uploaded_io.original_filename
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -40,6 +47,12 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+
+    uploaded_io = params[:user][:u_picture]
+    File.open(Rails.root.join('public', 'uploaded', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    params[:user][:u_picture] = "/uploaded/"+uploaded_io.original_filename
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }

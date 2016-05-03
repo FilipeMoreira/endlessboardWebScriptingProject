@@ -24,7 +24,11 @@
     <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Confirm Password" %>
   </div>
   
-  <div style="display: none"><%= f.text_field :u_picture, value: "http://www.cabodelgado.gov.mz/programa-do-governador/person.png/image_preview"%></div>
+  
+
+  <div class="form-group">
+    <%= f.file_field :u_picture, class: 'form-control'%>
+  </div>
   
   <div class="actions">
     <%= f.submit class: "btn btn-success", style: "width: 100%"%>

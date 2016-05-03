@@ -14,7 +14,15 @@
           <h2><%= post.p_title %></h2>
           <!--% = post.p_content %-->
           <!--% = post.post %-->
-          <p><%= link_to 'Edit', edit_post_path(post) %></p>
+          <% if logged_in? %>
+            <% if current_user.id == post.user.id %>
+              <p><%= link_to 'Edit', edit_post_path(post) %></p>
+            <% else %>
+              <p><br></p>
+            <% end %>
+          <% else %>
+            <p><br></p>
+          <% end %>
         </li>
       </a>
     <% end %>
