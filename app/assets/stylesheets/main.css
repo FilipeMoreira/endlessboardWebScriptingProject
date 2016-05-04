@@ -30,6 +30,10 @@ footer{
 	float: right;
 }
 
+.left{
+	float: left;
+}
+
 .list-group{
 }
 
@@ -60,9 +64,26 @@ footer{
 .btn-success{
 	color: #fff !important;
 }
+.btn-primary{
+	color: #fff !important;
+}
+
+.btn-white{
+	color: #fff !important;
+	background-color: #fff !important;
+	border: none;
+}
 
 .text-area{
 	min-height: 300px;
+}
+
+.panel-link{
+	color: #222;
+}
+
+.panel-link:hover{
+	text-decoration: none;
 }
 
 .edit-link:hover{

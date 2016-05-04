@@ -4,6 +4,13 @@
   <div class='panel panel-default panel-form'>
     <div class='panel-body'>
       <p id="notice"><%= notice %></p>
+          <% if(@post.post_id) 
+            @parent_post = Post.find(@post.post_id)
+            %>
+            <a href="/posts/<%= @post.post_id %>" class='btn btn-primary'><span>< Parent: <strong><%= @parent_post.p_title %></strong></span></a>
+          <% else %>
+            <a class='btn btn-white'><span></span></a>
+          <% end %>
 
       <p class='right'>&nbsp<%= @post.p_date %></p>
       <p class='right'> <img src="<%= @post.user.u_picture %>" height='20px' class='img-circle'> <%= @post.user.u_name %> at</p>
@@ -14,16 +21,104 @@
         <%= @post.p_content %>
       </p>
 
-      <p>
-        <%= @post.post %>
-      </p>
+      <!--p>
+        < %= @post.post %>
+      </p-->
       <% if logged_in? %>
           <% if current_user.id == @post.user.id %>
             <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-success" %>
           <% end %>
+          <%= link_to 'Reply', new_post_path(:parent => @post), class: "btn btn-primary right", id: "btn-new-post" %>
       <% end %>
       
       </div>
+  </div>
+  <div class='row'>
+    <div class='col-xs-1'></div>
+    <div class='col-xs-11'>
+      <% @post.post.each do |p| %>
+        <a href="/posts/<%= p.id %>" class='panel-link'>
+        <div class='panel panel-default panel-form'>
+          <div class='panel-body'>
+
+            <a class='btn btn-white'><span></span></a>
+
+            <p class='right'>&nbsp<%= p.p_date %></p>
+            <p class='right'> <img src="<%= p.user.u_picture %>" height='20px' class='img-circle'> <%= p.user.u_name %> at</p>
+            
+            <h1><%= p.p_title %></h1>
+
+            <p>
+              <%= p.p_content %>
+            </p>
+
+            <!--p>
+              < %= @post.post %>
+            </p-->
+            <% if logged_in? %>
+                <% if current_user.id == p.user.id %>
+                  <%= link_to 'Edit', edit_post_path(p), class: "btn btn-success" %>
+                <% end %>
+                <%= link_to 'Reply', new_post_path(:parent => p), class: "btn btn-primary right", id: "btn-new-post" %>
+            <% end %>
+            
+          </div>
+        </div>
+        </a>
+
+        <% @p = Post.find(p.id) %>
+        <% if(@p.post.count >0) %>
+        <div class='container-fluid'>
+          <div class='row'>
+            <div class='col-xs-1'></div>
+            <div class='col-xs-11'>
+              <% @p.post.each do |d| %>
+                <a href="/posts/<%= d.id %>" class='panel-link'>
+                <div class='panel panel-default panel-form'>
+                  <div class='panel-body'>
+
+                    <p class='right'>&nbsp<%= d.p_date %></p>
+                    <p class='right'> <img src="<%= d.user.u_picture %>" height='20px' class='img-circle'> <%= d.user.u_name %> at</p>
+                    
+                    <h1><%= d.p_title %></h1>
+
+                    <p>
+                      <%= d.p_content %>
+                    </p>
+
+                    <p>
+                      <% if(d.post.count > 1) %>
+                        <span class="badge"><%= d.post.count %> replies</span>
+                      <% else %>
+                        <% if(d.post.count > 0) %>
+                          <span class="badge"><%= d.post.count %> reply</span>
+                        <% else %>
+                          <span class="badge">No replies</span>
+                        <% end %>
+                      <% end %>
+                    </p>
+
+                    <!--p>
+                      < %= @post.post %>
+                    </p-->
+                    <% if logged_in? %>
+                        <% if current_user.id == d.user.id %>
+                          <%= link_to 'Edit', edit_post_path(d), class: "btn btn-success" %>
+                        <% end %>
+                        <%= link_to 'Reply', new_post_path(:parent => d), class: "btn btn-primary right", id: "btn-new-post" %>
+                    <% end %>
+                    
+                  </div>
+                </div>
+                </a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+
+      <% end %>
+    </div>
   </div>
 </div>
   

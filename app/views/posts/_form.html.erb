@@ -30,9 +30,16 @@
   <div class="form-group hidden">
     <%= f.text_field :user_id, class: "form-control", value: current_user.id %>
   </div>
-  <div class="form-group hidden">
-    <%= f.text_field :post_id, class: "form-control"%>
-  </div>
+
+  <% if(params[:parent]) %>
+    <div class="form-group hidden">
+      <%= f.text_field :post_id, class: "form-control", value: params[:parent]%>
+    </div>
+  <% else %>
+    <div class="form-group hidden">
+      <%= f.text_field :post_id, class: "form-control"%>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit class: "btn btn-success", style: "width: 100%"%>
   </div>

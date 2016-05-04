@@ -7,22 +7,33 @@
 <% end %>
 <ul class='list-group' style="margin-top: 52px">
     <% @posts.each do |post| %>
-      <a href="posts/<%= post.id %>">
+      
         <li class='list-group-item'>
+          <% if(post.post_id) 
+            @parent_post = Post.find(post.post_id)
+            %>
+            <a href="/posts/<%= post.post_id %>" class='btn btn-primary'><span>Parent: <strong><%= @parent_post.p_title %></strong></span></a>
+          <% else %>
+            <a class='btn btn-white'><span></span></a>
+          <% end %>
+          <a href="/posts/<%= post.id %>">
           <p class='right'>&nbsp<%= post.p_date %></p>
           <p class='right'> <img src="<%= post.user.u_picture %>" height='20px' class='img-circle'> <%= post.user.u_name %> at</p>
           <h2><%= post.p_title %></h2>
           <!--% = post.p_content %-->
           <!--% = post.post %-->
-          <% if logged_in? %>
-            <% if current_user.id == post.user.id %>
-              <p><%= link_to 'Edit', edit_post_path(post), class: "edit-link" %></p>
+          <p><%= post.p_content[0..80] %>...</p>
+          <p>
+            <% if(post.post.count > 1) %>
+              <span class="badge"><%= post.post.count %> replies</span>
             <% else %>
-              <p><br></p>
+              <% if(post.post.count > 0) %>
+                <span class="badge"><%= post.post.count %> reply</span>
+              <% else %>
+                <span class="badge">No replies</span>
+              <% end %>
             <% end %>
-          <% else %>
-            <p><br></p>
-          <% end %>
+          </p>
         </li>
       </a>
     <% end %>
