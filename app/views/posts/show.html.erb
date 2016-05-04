@@ -1,29 +1,30 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/header' %>
 
-<p>
-  <strong>P title:</strong>
-  <%= @post.p_title %>
-</p>
+<div class='container'>
+  <div class='panel panel-default panel-form'>
+    <div class='panel-body'>
+      <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>P content:</strong>
-  <%= @post.p_content %>
-</p>
+      <p class='right'>&nbsp<%= @post.p_date %></p>
+      <p class='right'> <img src="<%= @post.user.u_picture %>" height='20px' class='img-circle'> <%= @post.user.u_name %> at</p>
+      
+      <h1><%= @post.p_title %></h1>
 
-<p>
-  <strong>P date:</strong>
-  <%= @post.p_date %>
-</p>
+      <p>
+        <%= @post.p_content %>
+      </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @post.user %>
-</p>
-
-<p>
-  <strong>Post:</strong>
-  <%= @post.post %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+      <p>
+        <%= @post.post %>
+      </p>
+      <% if logged_in? %>
+          <% if current_user.id == @post.user.id %>
+            <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-success" %>
+          <% end %>
+      <% end %>
+      
+      </div>
+  </div>
+</div>
+  
+<%= render 'layouts/footer' %>

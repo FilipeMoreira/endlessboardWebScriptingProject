@@ -2,9 +2,9 @@
 
 <div class="container">
 <p id="notice"><%= notice %></p>
-
-<%= link_to 'New Post', new_post_path, class: "btn btn-default right", id: "btn-new-post" %>
-
+<% if logged_in? %>
+  <%= link_to 'New Post', new_post_path, class: "btn btn-default right", id: "btn-new-post" %>
+<% end %>
 <ul class='list-group' style="margin-top: 52px">
     <% @posts.each do |post| %>
       <a href="posts/<%= post.id %>">
@@ -16,7 +16,7 @@
           <!--% = post.post %-->
           <% if logged_in? %>
             <% if current_user.id == post.user.id %>
-              <p><%= link_to 'Edit', edit_post_path(post) %></p>
+              <p><%= link_to 'Edit', edit_post_path(post), class: "edit-link" %></p>
             <% else %>
               <p><br></p>
             <% end %>

@@ -1,24 +1,32 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/header' %>
 
-<p>
-  <strong>U name:</strong>
-  <%= @user.u_name %>
-</p>
+<div class='container'>
+	<div class='panel panel-default panel-form'>
+		<div class='panel-body'>
+			<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>U email:</strong>
-  <%= @user.u_email %>
-</p>
 
-<p>
-  <strong>U password:</strong>
-  <%= @user.u_password %>
-</p>
+			<center>
+				<img src="<%= @user.u_picture %>" height='128px' class='img-circle'>
+			</center>
 
-<p>
-  <strong>U picture:</strong>
-  <%= @user.u_picture %>
-</p>
+			<p>
+			  <strong>Name:</strong>
+			  <%= @user.u_name %>
+			</p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+			<p>
+			  <strong>Email:</strong>
+			  <%= @user.u_email %>
+			</p>
+			<% if logged_in? %>
+	    		<% if current_user.id == @user.id %>
+					<%= link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-success" %>
+				<% end %>
+			<% end %>
+				
+		</div>
+	</div>
+</div>
+	
+<%= render 'layouts/footer' %>

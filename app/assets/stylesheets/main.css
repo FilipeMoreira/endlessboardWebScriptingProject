@@ -10,7 +10,8 @@ body{
 footer{
 	border-top: solid 0.5px #aaa;
 	width: 100%;
-	padding-top: 32px
+	padding-top: 32px;
+	padding-bottom: 32px;
 }
 
 .navbar-form{
@@ -49,9 +50,25 @@ footer{
 }
 
 .panel{
-	box-shadow: 0 2px 4px 2px rgba(0,0,0,0.3);
+	box-shadow: 0 2px 2px -s2px rgba(0,0,0,0.3);
 }
 
 .panel-form{
 	margin-top: 20px;
+}
+
+.btn-success{
+	color: #fff !important;
+}
+
+.text-area{
+	min-height: 300px;
+}
+
+.edit-link:hover{
+	text-decoration: none !important;
+	background-color: none !important;
+	font-weight: bolder !important;
+	color: #fff !important;
+	border-radius: 2px;
 }
